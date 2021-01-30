@@ -128,7 +128,7 @@ func FixPrimaries() error {
 	// Remove primary file flag from broken or missing files.
 	if err := UnscopedDb().Table(entity.File{}.TableName()).
 		Where("(file_error <> '' OR file_missing = 1) AND file_primary <> 0").
-		UpdateColumn("file_primary", 0).Error; err != nil {
+		Update("file_primary", 0).Error; err != nil {
 		return err
 	}
 
@@ -180,7 +180,7 @@ func FlagHiddenPhotos() (err error) {
 	} else if n := len(hidden); n == 0 {
 		// Nothing to do.
 		return nil
-	} else if err = Db().Table(entity.Photo{}.TableName()).Where("id IN (?)", hidden).UpdateColumn("photo_quality", -1).Error; err != nil {
+	} else if err = Db().Table(entity.Photo{}.TableName()).Where("id IN (?)", hidden).Update("photo_quality", -1).Error; err != nil {
 		// Update failed.
 		return err
 	} else {
