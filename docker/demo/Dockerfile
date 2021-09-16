@@ -1,4 +1,4 @@
-FROM photoprism/photoprism:preview as build
+FROM thielepaul/photoprism:db-api-20230424 as build
 
 # Set environment variables
 ENV TF_CPP_MIN_LOG_LEVEL=2 \
