@@ -382,7 +382,7 @@ func (m *User) UpdateLoginTime() *time.Time {
 
 	timeStamp := TimePointer()
 
-	if err := Db().Model(m).UpdateColumn("LoginAt", timeStamp).Error; err != nil {
+	if err := Db().Model(m).Update("LoginAt", timeStamp).Error; err != nil {
 		return nil
 	}
 
